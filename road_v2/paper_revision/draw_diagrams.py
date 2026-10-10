@@ -4,6 +4,8 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch, Rectangle
+from matplotlib.transforms import Bbox
+from matplotlib.font_manager import FontProperties, findfont
 from PIL import Image
 import numpy as np
 
@@ -25,7 +27,19 @@ def canvas(w,h):
 
 def save(fig,name):
     OUT.mkdir(parents=True,exist_ok=True)
-    for ext in ('png','pdf','svg'): fig.savefig(OUT/f'{name}.{ext}',dpi=400,facecolor='white',bbox_inches='tight',pad_inches=.025)
+    # The full-canvas axes enlarge bbox_inches='tight' with empty margins. Crop
+    # to the actual diagram artists, including the inset orthophotos and wires.
+    fig.canvas.draw()
+    renderer=fig.canvas.get_renderer()
+    bounds=[]
+    for ax in fig.axes:
+        for artist in [*ax.texts,*ax.patches,*ax.lines,*ax.images]:
+            if artist.get_visible():
+                bounds.append(artist.get_window_extent(renderer))
+    content=Bbox.union(bounds).transformed(fig.dpi_scale_trans.inverted())
+    crop=Bbox.from_extents(content.x0-.035,content.y0-.035,
+                           content.x1+.035,content.y1+.035)
+    for ext in ('png','pdf','svg'): fig.savefig(OUT/f'{name}.{ext}',dpi=400,facecolor='white',bbox_inches=crop)
     plt.close(fig)
 
 def network():
@@ -63,23 +77,26 @@ def network():
     arrow(ax,[(.981,.758),(1.026,.758),(1.026,.230),(.981,.230)])
     arrow(ax,[(.920,.564),(.920,.306)])
     ax.text(.920,.120,'p(blocked)',ha='center',fontsize=8.2,color=INK)
-    ax.text(.505,.915,'GLOBAL BRANCH',ha='center',fontsize=8.2,fontweight='bold',color=BLUE)
+    ax.text(.505,.868,'GLOBAL BRANCH',ha='center',va='bottom',fontsize=8.2,fontweight='bold',color=BLUE)
     ax.text(.365,.506,'LOCAL CHANGE BRANCH',ha='left',fontsize=8.2,fontweight='bold',color=TEAL)
     save(fig,'fig_network')
 
 def workflow():
     fig,ax=canvas(7.2,2.9)
+    findfont(FontProperties(family='Arial'),fallback_to_default=False)
     xs=[.025,.275,.525,.775];w=.20
     for x,title in zip(xs,['OSM roads','GSI slope failures','GSI orthophotos','DEM deposits']):
-        box(ax,x,.800,w,.130,title,edge=BLUE,fill='#edf4f9',fs=8.3)
-    specs=[('1  Segment roads','50 m pieces'),('2  Select candidates','5 m buffer intersects slide'),('3  Verify visually','Blind review + recheck'),('4  Final dataset','2,750 segments\n671 blocked')]
+        box(ax,x,.800,w,.130,title,edge=BLUE,fill='#edf4f9',fs=10.5)
+    specs=[('1  Segment roads','50 m pieces'),('2  Select candidates','5 m buffer\nintersects slide'),('3  Verify visually','Blind review\n+ recheck'),('4  Final dataset','2,750 segments\n671 blocked')]
     for x,(title,sub) in zip(xs,specs):
-        box(ax,x,.260,w,.280,title+'\n\n'+sub,edge=TEAL,fill='#ecf8f5',fs=7.9)
+        box(ax,x,.260,w,.280,'',edge=TEAL,fill='#ecf8f5')
+        ax.text(x+w/2,.474,title,ha='center',va='center',fontsize=10.2,color=INK)
+        ax.text(x+w/2,.352,sub,ha='center',va='center',fontsize=10.2,color=INK,linespacing=1.25)
     for a,b in zip(xs[:-1],xs[1:]):arrow(ax,[(a+w+.008,.400),(b-.008,.400)])
     for x in (.125,.375,.625):arrow(ax,[(x,.794),(x,.546)],color=BLUE)
     arrow(ax,[(.875,.794),(.875,.650),(.690,.650),(.690,.547)],color='#7863a8')
-    ax.text(.802,.687,'Recheck selection',ha='center',fontsize=7.2,color='#7863a8')
-    ax.text(.50,.10,'Road-centred patches  |  Verified labels  |  Masks  |  Spatial folds',ha='center',fontsize=8.3,color=INK)
+    ax.text(.785,.687,'Recheck selection',ha='center',fontsize=9.2,color='#7863a8')
+    ax.text(.50,.10,'Road-centred patches  |  Verified labels  |  Masks  |  Spatial folds',ha='center',fontsize=10.2,color=INK)
     save(fig,'fig_dataprep')
 
 if __name__=='__main__':
