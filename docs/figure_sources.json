@@ -131,97 +131,28 @@
       "nendophoto2020",
       "20240102noto_anamizu_0111do"
     ],
-    "verified_segments": 17,
-    "blocked": 3,
-    "prediction_unit": "one classification score per nominal 50 m road segment",
-    "colour_mapping": "YlOrRd(score), range 0 to 1, no spatial interpolation",
-    "scores": "oof_ft_convnext_siamese_v2_verified.csv",
-    "segments": [
-      {
-        "sample_id": "noto_00794",
-        "label": 1,
-        "score": 0.9909
-      },
-      {
-        "sample_id": "noto_00795",
-        "label": 0,
-        "score": 0.70188
-      },
-      {
-        "sample_id": "noto_00796",
-        "label": 0,
-        "score": 0.0009
-      },
-      {
-        "sample_id": "noto_00800",
-        "label": 0,
-        "score": 0.00328
-      },
-      {
-        "sample_id": "noto_00801",
-        "label": 0,
-        "score": 0.89631
-      },
-      {
-        "sample_id": "noto_00802",
-        "label": 1,
-        "score": 0.99036
-      },
-      {
-        "sample_id": "noto_00803",
-        "label": 1,
-        "score": 0.88563
-      },
-      {
-        "sample_id": "noto_00901",
-        "label": 0,
-        "score": 0.11713
-      },
-      {
-        "sample_id": "noto_01214",
-        "label": 0,
-        "score": 0.00717
-      },
-      {
-        "sample_id": "noto_01511",
-        "label": 0,
-        "score": 0.00488
-      },
-      {
-        "sample_id": "noto_01597",
-        "label": 0,
-        "score": 0.01081
-      },
-      {
-        "sample_id": "noto_01827",
-        "label": 0,
-        "score": 0.00386
-      },
-      {
-        "sample_id": "noto_01907",
-        "label": 0,
-        "score": 0.0163
-      },
-      {
-        "sample_id": "noto_02068",
-        "label": 0,
-        "score": 0.00463
-      },
-      {
-        "sample_id": "noto_02205",
-        "label": 0,
-        "score": 0.00017
-      },
-      {
-        "sample_id": "noto_02206",
-        "label": 0,
-        "score": 0.00328
-      },
-      {
-        "sample_id": "noto_03228",
-        "label": 0,
-        "score": 0.00352
-      }
-    ]
+    "mapped_road_features": 7,
+    "blocked_segments": [
+      "noto_00794",
+      "noto_00802",
+      "noto_00803"
+    ],
+    "road_geometry": "landscape_roads.geojson (local subset of original OSM download)",
+    "mask_width_m": 10,
+    "mask_alpha": 0.48,
+    "annotation_rule": "label=1 segments red; all remaining mapped road portions green as requested",
+    "role": "landscape annotation and source-image illustration, not model prediction or new evaluation labels",
+    "closeup": {
+      "layer": "20240102noto_anamizu_0111do",
+      "date": "2024-01-11",
+      "zoom": 18,
+      "x0": 59077421,
+      "y0": 26058930,
+      "width_px": 463,
+      "height_px": 309,
+      "width_m": 220,
+      "height_m": 146.66666666666666
+    },
+    "performance_metrics_changed": false
   }
 }

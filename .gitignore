@@ -11,7 +11,8 @@ road_v2/dataset_noto2024_v0/chips/
 road_v2/dataset_noto2024_v0/masks/
 road_v2/dataset_noto2024_v0/review/
 road_v2/paper_revision/tile_cache/
-road_v2/paper_revision/figures/
+road_v2/paper_revision/figures/*
+!road_v2/paper_revision/figures/landscape_roads.geojson
 paper_buildings/figures/
 *.pt
 *.pth
