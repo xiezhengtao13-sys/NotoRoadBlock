@@ -35,13 +35,13 @@
     },
     {
       "path": "docs/figure_sources.json",
-      "bytes": 3967,
-      "sha256": "db0b7e3b8e557fa2edd99e903772bd50f8806e0c16fe0d4e370385794f2f5f9c"
+      "bytes": 4195,
+      "sha256": "57049151a90bd802e360ddb8f7033f1e13e846fc26352d1d532014545384bc32"
     },
     {
       "path": "docs/reproduction.md",
-      "bytes": 4481,
-      "sha256": "073d84999e5e496ca72db495d28c4b238ea261d7eef14eb87340ac3d37893c5f"
+      "bytes": 4519,
+      "sha256": "73c5081ab389caf0e381f8b312811041d2e9dd36d464adee803de86cbdc8a68c"
     },
     {
       "path": "docs/tested_environments.json",
@@ -225,8 +225,8 @@
     },
     {
       "path": "road_v2/paper_revision/draw_diagrams.py",
-      "bytes": 6009,
-      "sha256": "e709d65c02f8326f9a9325c807dbcaf95a71a4617d44147be2a100a737faaa67"
+      "bytes": 6024,
+      "sha256": "97fe915858a290d14b372dcd018b18eee2a8ed86fe6f0f92dabb315c45cd0c9c"
     },
     {
       "path": "road_v2/paper_revision/draw_landscape.py",

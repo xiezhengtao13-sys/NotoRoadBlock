@@ -78,7 +78,7 @@ def network():
     arrow(ax,[(.920,.564),(.920,.306)])
     ax.text(.920,.120,'p(blocked)',ha='center',fontsize=8.2,color=INK)
     ax.text(.505,.868,'GLOBAL BRANCH',ha='center',va='bottom',fontsize=8.2,fontweight='bold',color=BLUE)
-    ax.text(.365,.506,'LOCAL CHANGE BRANCH',ha='left',fontsize=8.2,fontweight='bold',color=TEAL)
+    ax.text(.5975,.488,'LOCAL CHANGE BRANCH',ha='center',va='bottom',fontsize=8.2,fontweight='bold',color=TEAL)
     save(fig,'fig_network')
 
 def workflow():

@@ -164,6 +164,13 @@
       10.2,
       10.5
     ],
-    "workflow_recheck_label_pt": 9.2
+    "workflow_recheck_label_pt": 9.2,
+    "local_branch_heading": {
+      "x": 0.5975,
+      "y": 0.488,
+      "horizontal_alignment": "center over all three local branch boxes",
+      "vertical_alignment": "bottom",
+      "gap_above_boxes_axes_units": 0.021
+    }
   }
 }
