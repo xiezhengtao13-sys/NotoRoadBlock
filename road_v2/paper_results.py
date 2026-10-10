@@ -138,12 +138,34 @@ def collect(src):
     return rows, fz
 
 
+def result_table_frame(kind):
+    """Readable wide tables; uncertainty cells never break at arbitrary positions."""
+    columns = {
+        "results": r">{\raggedright\arraybackslash}p{7.0cm}CCCC",
+        "ablation": (r">{\raggedright\arraybackslash}p{5.3cm}"
+                     r">{\centering\arraybackslash}p{1.25cm}"
+                     r">{\centering\arraybackslash}p{1.25cm}"
+                     r">{\centering\arraybackslash}p{2.0cm}CC"),
+        "seeds": r">{\raggedright\arraybackslash}p{6.4cm}CCCC",
+    }
+    head = [r"\begingroup", r"\setlength{\tabcolsep}{4pt}",
+            r"\renewcommand{\arraystretch}{1.20}",
+            r"\providecommand{\resultHead}[2]{\shortstack[c]{#1\\[1pt]#2}}",
+            r"\providecommand{\resultSD}[2]{\mbox{#1 $\pm$ #2}}",
+            r"\providecommand{\resultCI}[3]{\shortstack[c]{#1\\[1pt]{\fontsize{8.5}{10}\selectfont [#2, #3]}}}",
+            r"\begin{adjustwidth}{-\extralength}{0cm}",
+            r"\begin{tabularx}{\fulllength}{" + columns[kind] + "}", r"\toprule"]
+    tail = [r"\bottomrule", r"\end{tabularx}", r"\end{adjustwidth}", r"\endgroup"]
+    return head, tail
+
+
 def table_tex(rows, src):
     out, prev = [], None
     red = src != "verified"  # numbers from unverified labels are shown in red in the draft
     for r in rows:
-        cell = lambda m: (f"\\textcolor{{red}}{{{r[m + '_mean']:.3f} $\\pm$ {r[m + '_sd']:.3f}}}" if red
-                          else f"{r[m + '_mean']:.3f} $\\pm$ {r[m + '_sd']:.3f}")
+        def cell(m):
+            value = f"\\resultSD{{{r[m + '_mean']:.3f}}}{{{r[m + '_sd']:.3f}}}"
+            return f"\\textcolor{{red}}{{{value}}}" if red else value
         group = "base" if r["name"].startswith(("Road class", "Colour")) else r["kind"]
         if out and group != prev:
             out.append("\\midrule")
@@ -151,11 +173,8 @@ def table_tex(rows, src):
         name = f"\\textbf{{{r['name']}}}" if r["kind"] == "proposed" else r["name"]
         out.append(f"{name} & {cell('AUROC')} & {cell('AUPRC')} & {cell('F1')} & {cell('AUROC_vs_near')} \\\\")
     (PAPER / "tables").mkdir(exist_ok=True)
-    # MDPI wide table: the table extends into the left margin (\fulllength) so that "mean +- SD" fits on one line
-    head = ["\\begin{adjustwidth}{-\\extralength}{0cm}",
-            "\\begin{tabularx}{\\fulllength}{>{\\raggedright\\arraybackslash}p{6.3cm}CCCC}", "\\toprule",
-            "\\textbf{Model and Input} & \\textbf{AUROC} & \\textbf{AUPRC} & \\textbf{F1} & \\textbf{AUROC vs. Near} \\\\", "\\midrule"]
-    tail = ["\\bottomrule", "\\end{tabularx}", "\\end{adjustwidth}"]
+    head, tail = result_table_frame("results")
+    head += [r"\textbf{Model and Input} & \textbf{AUROC} & \textbf{AUPRC} & \textbf{F1} & \textbf{\resultHead{AUROC vs.}{Near}} \\", r"\midrule"]
     (PAPER / "tables" / f"results_{src}.tex").write_text("\n".join(head + out + tail) + "\n", encoding="utf-8")
 
 
@@ -469,18 +488,16 @@ def seed_stats(src, n_boot=2000):
 
 
 def seeds_tex(st, src):
-    lines = ["\\begin{adjustwidth}{-\\extralength}{0cm}",
-             "\\begin{tabularx}{\\fulllength}{>{\\raggedright\\arraybackslash}p{5.2cm}CCCC}", "\\toprule",
-             "\\textbf{Model and Input} & \\textbf{AUROC} & \\textbf{AUPRC} & \\textbf{AUROC vs. Cand.-Clear} & "
-             "\\textbf{Share at 80\\% Recall (\\%)} \\\\", "\\midrule"]
+    lines, tail = result_table_frame("seeds")
+    lines += [r"\textbf{Model and Input} & \textbf{AUROC} & \textbf{AUPRC} & \textbf{\resultHead{AUROC vs.}{Cand.-Clear}} & \textbf{\resultHead{Share at 80\%}{Recall (\%)}} \\", r"\midrule"]
     for name, cfg in (("ConvNeXt-T fine-tuned, post", "convnext_post"), (PROPOSED, PROP_CFG)):
         r = st[cfg]
-        cells = [f"{r['mean'][k]:.3f} $\\pm$ {r['sd'][k]:.3f}" for k in range(3)] + [f"{r['mean'][3]:.2f} $\\pm$ {r['sd'][3]:.2f}"]
+        cells = [f"\\resultSD{{{r['mean'][k]:.3f}}}{{{r['sd'][k]:.3f}}}" for k in range(3)] + [f"\\resultSD{{{r['mean'][3]:.2f}}}{{{r['sd'][3]:.2f}}}"]
         lines.append((f"\\textbf{{{name}}}" if name == PROPOSED else name) + " & " + " & ".join(cells) + " \\\\")
     g = st["gain"]
     lines += ["\\midrule", "Difference of the seed-averaged scores & " + " & ".join(
-        f"{signed(g['obs'][k])} [{signed(g['lo'][k])}, {signed(g['hi'][k])}]" for k in range(3)) + " & -- \\\\",
-              "\\bottomrule", "\\end{tabularx}", "\\end{adjustwidth}"]
+        f"\\resultCI{{{signed(g['obs'][k])}}}{{{signed(g['lo'][k])}}}{{{signed(g['hi'][k])}}}" for k in range(3)) + " & -- \\\\"]
+    lines += tail
     (PAPER / "tables" / f"seeds_{src}.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -505,19 +522,24 @@ def ablations(src, n_boot=2000):
             r.update(dAUROC=r["AUROC"] - rows[0]["AUROC"], dAUROCLo=lo[0], dAUROCHi=hi[0],
                      dCand=r["Cand"] - rows[0]["Cand"], dCandLo=lo[1], dCandHi=hi[1])
         rows.append(r)
-    ci = lambda r, k: f"{signed(r[k])} [{signed(r[k + 'Lo'])}, {signed(r[k + 'Hi'])}]" if k in r else "--"
-    lines = ["\\begin{adjustwidth}{-\\extralength}{0cm}",
-             "\\begin{tabularx}{\\fulllength}{>{\\raggedright\\arraybackslash}p{5.4cm}CCCCC}", "\\toprule",
-             "\\textbf{Configuration} & \\textbf{AUROC} & \\textbf{AUPRC} & \\textbf{AUROC vs. Cand.-Clear} & "
-             "\\textbf{$\\Delta$AUROC [95\\% CI]} & \\textbf{$\\Delta$Cand.-Clear [95\\% CI]} \\\\", "\\midrule"]
+    ablations_tex(rows, src)
+    return rows
+
+
+def ablations_tex(rows, src):
+    """Format saved ablation statistics without rerunning their bootstrap."""
+    ci = lambda r, k: f"\\resultCI{{{signed(r[k])}}}{{{signed(r[k + 'Lo'])}}}{{{signed(r[k + 'Hi'])}}}" if k in r else "--"
+    lines, tail = result_table_frame("ablation")
+    lines += [r"\textbf{Configuration} & \textbf{AUROC} & \textbf{AUPRC} & \textbf{\resultHead{AUROC vs.}{Cand.-Clear}} & \textbf{\resultHead{$\Delta$AUROC}{[95\% CI]}} & \textbf{\resultHead{$\Delta$Cand.-Clear}{[95\% CI]}} \\", r"\midrule"]
     for r in rows:
         name = f"\\textbf{{{r['name']}}}" if r["tag"] == "Full" else r["name"]
         lines.append(f"{name} & {r['AUROC']:.3f} & {r['AUPRC']:.3f} & {r['Cand']:.3f} & {ci(r, 'dAUROC')} & {ci(r, 'dCand')} \\\\")
         if r["tag"] in ("Full", "Glob", "Aux", "Posthead"):
             lines.append("\\midrule")
-    lines += ["\\bottomrule", "\\end{tabularx}", "\\end{adjustwidth}"]
+        elif r is not rows[-1]:
+            lines.append(r"\addlinespace[3pt]")
+    lines += tail
     (PAPER / "tables" / f"ablation_{src}.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    return rows
 
 
 def number_macros(rows, key, fz, src):

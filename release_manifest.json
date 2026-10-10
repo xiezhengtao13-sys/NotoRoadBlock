@@ -40,8 +40,8 @@
     },
     {
       "path": "docs/reproduction.md",
-      "bytes": 4519,
-      "sha256": "73c5081ab389caf0e381f8b312811041d2e9dd36d464adee803de86cbdc8a68c"
+      "bytes": 4898,
+      "sha256": "8ed112a869b5964d059194ea9ecb82fea2960f1bd6ce94a17e78bf6a25cfe9a0"
     },
     {
       "path": "docs/tested_environments.json",
@@ -220,8 +220,8 @@
     },
     {
       "path": "road_v2/paper_results.py",
-      "bytes": 40470,
-      "sha256": "f4f05552e3ff700279def1379201627430eff729f532b39f28d9098be5db7563"
+      "bytes": 41248,
+      "sha256": "afacb6f4e880c729026d86c5a9dfe120adea1abc7d02f4db24d485dcf54a9be5"
     },
     {
       "path": "road_v2/paper_revision/draw_diagrams.py",
