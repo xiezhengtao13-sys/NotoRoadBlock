@@ -1,0 +1,84 @@
+{
+ "config": "convnext_post",
+ "labels": "verified",
+ "backbone": "convnext_tiny.in12k_ft_in1k",
+ "mode": "post",
+ "epochs": 10,
+ "overall": {
+  "n": 2750,
+  "n_pos": 671,
+  "chance_AUPRC": 0.244,
+  "AUROC": 0.952,
+  "AUPRC": 0.8807,
+  "F1": 0.807,
+  "AUROC_vs_near": 0.9325,
+  "AUROC_vs_random": 0.9551
+ },
+ "folds": {
+  "AUROC_mean": 0.9551,
+  "AUROC_sd": 0.0142,
+  "AUPRC_mean": 0.8848,
+  "AUPRC_sd": 0.0231,
+  "F1_mean": 0.8062,
+  "F1_sd": 0.018,
+  "AUROC_vs_near_mean": 0.9368,
+  "AUROC_vs_near_sd": 0.0133,
+  "AUROC_vs_random_mean": 0.9577,
+  "AUROC_vs_random_sd": 0.0189,
+  "chance_AUPRC_mean": 0.2436,
+  "chance_AUPRC_sd": 0.0138
+ },
+ "per_group": {
+  "0": {
+   "n": 540,
+   "n_pos": 131,
+   "chance_AUPRC": 0.243,
+   "AUROC": 0.9736,
+   "AUPRC": 0.9281,
+   "F1": 0.8321,
+   "AUROC_vs_near": 0.955,
+   "AUROC_vs_random": 0.9864
+  },
+  "1": {
+   "n": 578,
+   "n_pos": 143,
+   "chance_AUPRC": 0.247,
+   "AUROC": 0.9536,
+   "AUPRC": 0.8661,
+   "F1": 0.7957,
+   "AUROC_vs_near": 0.934,
+   "AUROC_vs_random": 0.9545
+  },
+  "2": {
+   "n": 567,
+   "n_pos": 139,
+   "chance_AUPRC": 0.245,
+   "AUROC": 0.9618,
+   "AUPRC": 0.8843,
+   "F1": 0.8235,
+   "AUROC_vs_near": 0.9427,
+   "AUROC_vs_random": 0.9655
+  },
+  "3": {
+   "n": 518,
+   "n_pos": 114,
+   "chance_AUPRC": 0.22,
+   "AUROC": 0.9565,
+   "AUPRC": 0.8813,
+   "F1": 0.7884,
+   "AUROC_vs_near": 0.938,
+   "AUROC_vs_random": 0.9539
+  },
+  "4": {
+   "n": 547,
+   "n_pos": 144,
+   "chance_AUPRC": 0.263,
+   "AUROC": 0.9302,
+   "AUPRC": 0.8642,
+   "F1": 0.7914,
+   "AUROC_vs_near": 0.9142,
+   "AUROC_vs_random": 0.928
+  }
+ },
+ "minutes": 7.3
+}

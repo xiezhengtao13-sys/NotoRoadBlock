@@ -1,0 +1,12 @@
+\begin{adjustwidth}{-\extralength}{0cm}
+\begin{tabularx}{\fulllength}{>{\raggedright\arraybackslash}p{5.2cm}CCCC}
+\toprule
+\textbf{Model and Input} & \textbf{AUROC} & \textbf{AUPRC} & \textbf{AUROC vs. Cand.-Clear} & \textbf{Share at 80\% Recall (\%)} \\
+\midrule
+ConvNeXt-T fine-tuned, post & 0.950 $\pm$ 0.002 & 0.882 $\pm$ 0.001 & 0.839 $\pm$ 0.011 & 3.36 $\pm$ 0.30 \\
+\textbf{Proposed network, pre + post} & 0.959 $\pm$ 0.001 & 0.895 $\pm$ 0.005 & 0.863 $\pm$ 0.003 & 3.29 $\pm$ 0.39 \\
+\midrule
+Difference of the seed-averaged scores & +0.008 [+0.004, +0.013] & +0.013 [+0.003, +0.023] & +0.019 [+0.004, +0.035] & -- \\
+\bottomrule
+\end{tabularx}
+\end{adjustwidth}

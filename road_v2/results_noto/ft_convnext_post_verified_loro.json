@@ -1,0 +1,84 @@
+{
+ "config": "convnext_post",
+ "labels": "verified",
+ "backbone": "convnext_tiny.in12k_ft_in1k",
+ "mode": "post",
+ "epochs": 10,
+ "overall": {
+  "n": 2750,
+  "n_pos": 671,
+  "chance_AUPRC": 0.244,
+  "AUROC": 0.9315,
+  "AUPRC": 0.8412,
+  "F1": 0.7613,
+  "AUROC_vs_near": 0.9085,
+  "AUROC_vs_random": 0.9371
+ },
+ "folds": {
+  "AUROC_mean": 0.9308,
+  "AUROC_sd": 0.0272,
+  "AUPRC_mean": 0.8264,
+  "AUPRC_sd": 0.0439,
+  "F1_mean": 0.7449,
+  "F1_sd": 0.0438,
+  "AUROC_vs_near_mean": 0.9134,
+  "AUROC_vs_near_sd": 0.0272,
+  "AUROC_vs_random_mean": 0.9295,
+  "AUROC_vs_random_sd": 0.0285,
+  "chance_AUPRC_mean": 0.2168,
+  "chance_AUPRC_sd": 0.1166
+ },
+ "per_group": {
+  "anamizu": {
+   "n": 435,
+   "n_pos": 59,
+   "chance_AUPRC": 0.136,
+   "AUROC": 0.9255,
+   "AUPRC": 0.7776,
+   "F1": 0.7119,
+   "AUROC_vs_near": 0.914,
+   "AUROC_vs_random": 0.918
+  },
+  "nanao": {
+   "n": 421,
+   "n_pos": 15,
+   "chance_AUPRC": 0.036,
+   "AUROC": 0.9813,
+   "AUPRC": 0.8165,
+   "F1": 0.75,
+   "AUROC_vs_near": 0.954,
+   "AUROC_vs_random": 0.9844
+  },
+  "suzu-wajimaEAST": {
+   "n": 971,
+   "n_pos": 337,
+   "chance_AUPRC": 0.347,
+   "AUROC": 0.9182,
+   "AUPRC": 0.8632,
+   "F1": 0.785,
+   "AUROC_vs_near": 0.9052,
+   "AUROC_vs_random": 0.9102
+  },
+  "wajimaCENTRAL": {
+   "n": 454,
+   "n_pos": 146,
+   "chance_AUPRC": 0.322,
+   "AUROC": 0.9292,
+   "AUPRC": 0.89,
+   "F1": 0.7972,
+   "AUROC_vs_near": 0.9236,
+   "AUROC_vs_random": 0.9284
+  },
+  "wajimaWEST": {
+   "n": 469,
+   "n_pos": 114,
+   "chance_AUPRC": 0.243,
+   "AUROC": 0.8998,
+   "AUPRC": 0.7846,
+   "F1": 0.6805,
+   "AUROC_vs_near": 0.87,
+   "AUROC_vs_random": 0.9064
+  }
+ },
+ "minutes": 8.8
+}

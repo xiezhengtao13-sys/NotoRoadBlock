@@ -1,0 +1,26 @@
+\begin{adjustwidth}{-\extralength}{0cm}
+\begin{tabularx}{\fulllength}{>{\raggedright\arraybackslash}p{6.3cm}CCCC}
+\toprule
+\textbf{Model and Input} & \textbf{AUROC} & \textbf{AUPRC} & \textbf{F1} & \textbf{AUROC vs. Near} \\
+\midrule
+Road class only (no image) & 0.599 $\pm$ 0.033 & 0.301 $\pm$ 0.031 & 0.413 $\pm$ 0.037 & 0.560 $\pm$ 0.028 \\
+Colour statistics, post & 0.693 $\pm$ 0.040 & 0.425 $\pm$ 0.069 & 0.455 $\pm$ 0.046 & 0.644 $\pm$ 0.029 \\
+\midrule
+ConvNeXt-T frozen, post & 0.871 $\pm$ 0.022 & 0.701 $\pm$ 0.064 & 0.658 $\pm$ 0.026 & 0.827 $\pm$ 0.023 \\
+DINOv2-B frozen, post & 0.894 $\pm$ 0.025 & 0.742 $\pm$ 0.076 & 0.679 $\pm$ 0.039 & 0.851 $\pm$ 0.035 \\
+DINOv2-B frozen, post, road-pooled & 0.925 $\pm$ 0.021 & 0.819 $\pm$ 0.062 & 0.741 $\pm$ 0.056 & 0.896 $\pm$ 0.030 \\
+DINOv2-B frozen, pre + post, road-pooled & 0.916 $\pm$ 0.017 & 0.802 $\pm$ 0.055 & 0.718 $\pm$ 0.037 & 0.880 $\pm$ 0.026 \\
+DINOv2-B frozen, road change only (pre vs. post) & 0.796 $\pm$ 0.042 & 0.546 $\pm$ 0.085 & 0.568 $\pm$ 0.055 & 0.746 $\pm$ 0.042 \\
+DINOv2-B frozen, post, road-pooled + road change & 0.926 $\pm$ 0.022 & 0.821 $\pm$ 0.061 & 0.741 $\pm$ 0.057 & 0.897 $\pm$ 0.030 \\
+\midrule
+ResNet-50 fine-tuned, post & 0.912 $\pm$ 0.020 & 0.785 $\pm$ 0.035 & 0.711 $\pm$ 0.033 & 0.878 $\pm$ 0.025 \\
+Swin-T fine-tuned, post & 0.948 $\pm$ 0.013 & 0.867 $\pm$ 0.027 & 0.789 $\pm$ 0.036 & 0.924 $\pm$ 0.015 \\
+ConvNeXt-T fine-tuned, post & 0.952 $\pm$ 0.012 & 0.886 $\pm$ 0.018 & 0.809 $\pm$ 0.028 & 0.933 $\pm$ 0.011 \\
+ConvNeXt-T fine-tuned, post + road mask & 0.957 $\pm$ 0.010 & 0.887 $\pm$ 0.017 & 0.805 $\pm$ 0.013 & 0.939 $\pm$ 0.011 \\
+\midrule
+Siamese ConvNeXt-T, global fusion, pre + post & 0.959 $\pm$ 0.009 & 0.894 $\pm$ 0.014 & 0.829 $\pm$ 0.021 & 0.942 $\pm$ 0.009 \\
+\midrule
+\textbf{Proposed network, pre + post} & 0.960 $\pm$ 0.010 & 0.899 $\pm$ 0.018 & 0.815 $\pm$ 0.021 & 0.944 $\pm$ 0.010 \\
+\bottomrule
+\end{tabularx}
+\end{adjustwidth}

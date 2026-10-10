@@ -1,0 +1,38 @@
+{
+ "post (DINOv2 + road-pooled)": {
+  "AUROC_mean": 0.925,
+  "AUROC_sd": 0.021,
+  "AUPRC_mean": 0.819,
+  "AUPRC_sd": 0.062,
+  "AUROC_vs_near_mean": 0.896,
+  "AUROC_vs_near_sd": 0.03,
+  "F1_mean": 0.741,
+  "F1_sd": 0.056,
+  "chance_AUPRC_mean": 0.244,
+  "chance_AUPRC_sd": 0.014
+ },
+ "post + road change": {
+  "AUROC_mean": 0.926,
+  "AUROC_sd": 0.022,
+  "AUPRC_mean": 0.821,
+  "AUPRC_sd": 0.061,
+  "AUROC_vs_near_mean": 0.897,
+  "AUROC_vs_near_sd": 0.03,
+  "F1_mean": 0.741,
+  "F1_sd": 0.057,
+  "chance_AUPRC_mean": 0.244,
+  "chance_AUPRC_sd": 0.014
+ },
+ "road change only": {
+  "AUROC_mean": 0.796,
+  "AUROC_sd": 0.042,
+  "AUPRC_mean": 0.546,
+  "AUPRC_sd": 0.085,
+  "AUROC_vs_near_mean": 0.746,
+  "AUROC_vs_near_sd": 0.042,
+  "F1_mean": 0.568,
+  "F1_sd": 0.055,
+  "chance_AUPRC_mean": 0.244,
+  "chance_AUPRC_sd": 0.014
+ }
+}

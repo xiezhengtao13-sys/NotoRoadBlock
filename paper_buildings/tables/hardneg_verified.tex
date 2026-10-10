@@ -1,0 +1,12 @@
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{5.6cm}CCCC}
+\toprule
+\textbf{Model and Input} & \textbf{All Negatives} & \textbf{Candidate-Clear} & \textbf{Near} & \textbf{Random} \\
+ & (2079) & (146) & (925) & (1008) \\
+\midrule
+DINOv2-B frozen, post, road-pooled & 0.925 & 0.816 & 0.908 & 0.957 \\
+ConvNeXt-T fine-tuned, post & 0.948 & 0.832 & 0.944 & 0.969 \\
+ConvNeXt-T fine-tuned, post + road mask & 0.952 & 0.852 & 0.945 & 0.972 \\
+Siamese ConvNeXt-T, global fusion, pre + post & 0.957 & 0.856 & 0.953 & 0.976 \\
+\textbf{Proposed network, pre + post} & 0.960 & 0.860 & 0.957 & 0.978 \\
+\bottomrule
+\end{tabularx}

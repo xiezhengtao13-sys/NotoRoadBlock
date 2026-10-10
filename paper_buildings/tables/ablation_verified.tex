@@ -1,0 +1,21 @@
+\begin{adjustwidth}{-\extralength}{0cm}
+\begin{tabularx}{\fulllength}{>{\raggedright\arraybackslash}p{5.4cm}CCCCC}
+\toprule
+\textbf{Configuration} & \textbf{AUROC} & \textbf{AUPRC} & \textbf{AUROC vs. Cand.-Clear} & \textbf{$\Delta$AUROC [95\% CI]} & \textbf{$\Delta$Cand.-Clear [95\% CI]} \\
+\midrule
+\textbf{Proposed network} & 0.960 & 0.898 & 0.860 & -- & -- \\
+\midrule
+Without neighbourhood search (co-located cells only) & 0.958 & 0.891 & 0.860 & $-$0.002 [$-$0.006, +0.002] & +0.001 [$-$0.021, +0.022] \\
+Without road-corridor weighting & 0.952 & 0.883 & 0.850 & $-$0.008 [$-$0.013, $-$0.003] & $-$0.010 [$-$0.028, +0.008] \\
+Without local change branch & 0.957 & 0.882 & 0.848 & $-$0.003 [$-$0.007, +0.001] & $-$0.012 [$-$0.037, +0.014] \\
+Global fusion with a single head & 0.957 & 0.893 & 0.856 & $-$0.003 [$-$0.008, +0.002] & $-$0.004 [$-$0.032, +0.025] \\
+\midrule
+With auxiliary deposition-mask loss & 0.958 & 0.894 & 0.862 & $-$0.002 [$-$0.007, +0.002] & +0.002 [$-$0.016, +0.021] \\
+\midrule
+Fused head alone & 0.962 & 0.901 & 0.863 & +0.001 [$-$0.001, +0.004] & +0.003 [$-$0.004, +0.010] \\
+Post-event head alone & 0.955 & 0.888 & 0.852 & $-$0.005 [$-$0.007, $-$0.003] & $-$0.008 [$-$0.015, $-$0.002] \\
+\midrule
+Without pre-event image (single-temporal) & 0.948 & 0.883 & 0.832 & $-$0.012 [$-$0.021, $-$0.004] & $-$0.028 [$-$0.052, $-$0.003] \\
+\bottomrule
+\end{tabularx}
+\end{adjustwidth}

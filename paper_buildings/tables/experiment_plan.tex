@@ -1,0 +1,12 @@
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.5cm}>{\raggedright\arraybackslash}p{2.4cm}X>{\raggedright\arraybackslash}p{2.25cm}>{\raggedright\arraybackslash}p{1.2cm}}
+\toprule
+\textbf{ID} & \textbf{Question} & \textbf{Compared configurations} & \textbf{Protocol / outputs} & \textbf{Results} \\
+\midrule
+E1 & Overall model comparison & Road class; colour statistics; frozen ConvNeXt-T and DINOv2; fine-tuned ResNet-50, Swin-T and ConvNeXt-T; global-fusion Siamese; proposed network & Spatial five-fold CV; AUROC, AUPRC, F1 & \ref{sec:overall} \\
+E2 & Bi-temporal and road evidence & Pre + post versus post only; road-pooled versus global frozen features; non-learned change features; post + road-mask input & Spatial CV; pooled AUROC by negative type & \ref{sec:change} \\
+E3 & Component ablations & Remove neighbourhood search, road weighting or local branch; add auxiliary loss; evaluate each prediction head & Spatial CV, first seed; paired block-bootstrap differences & \ref{sec:ablation} \\
+E4 & Training stability & Proposed network and post-only ConvNeXt-T, each with three seeds & Spatial CV; seed variability and seed-averaged differences & \ref{sec:stability} \\
+E5 & Regional transfer & Proposed, post-only, global-fusion Siamese and frozen road-pooled DINOv2 & Leave one region out; regional and pooled AUROC / AUPRC & \ref{sec:transfer} \\
+E6 & Inspection workload & Proposed network and post-only ConvNeXt-T, compared with random inspection & Population-weighted ranking; inspected share at 50\% and 80\% recall & \ref{sec:screening-results} \\
+\bottomrule
+\end{tabularx}
