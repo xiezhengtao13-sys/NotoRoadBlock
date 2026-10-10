@@ -1,0 +1,227 @@
+{
+  "data_examples": [
+    {
+      "sample_id": "noto_00794",
+      "y": 1,
+      "highway": "motorway",
+      "region": "anamizu",
+      "pre_date": "2020",
+      "post_date": "2024-01-11",
+      "post_apr_date": "2024-04"
+    },
+    {
+      "sample_id": "noto_00028",
+      "y": 1,
+      "highway": "unclassified",
+      "region": "suzu-wajimaEAST",
+      "pre_date": "2021",
+      "post_date": "2024-01-02",
+      "post_apr_date": "2024-04"
+    },
+    {
+      "sample_id": "noto_00999",
+      "y": 1,
+      "highway": "primary",
+      "region": "suzu-wajimaEAST",
+      "pre_date": "2020",
+      "post_date": "2024-01-02",
+      "post_apr_date": "2024-04"
+    },
+    {
+      "sample_id": "noto_00796",
+      "y": 0,
+      "highway": "motorway",
+      "region": "anamizu",
+      "pre_date": "2020",
+      "post_date": "2024-01-11",
+      "post_apr_date": "2024-04"
+    },
+    {
+      "sample_id": "noto_02759",
+      "y": 0,
+      "highway": "primary",
+      "region": "wajimaCENTRAL",
+      "pre_date": "2020",
+      "post_date": "2024-01-02",
+      "post_apr_date": "2024-04"
+    }
+  ],
+  "qualitative_examples": [
+    {
+      "sample_id": "noto_00082",
+      "label": 1,
+      "score": 0.96227,
+      "row": 1,
+      "image_columns": [
+        1,
+        2
+      ],
+      "category": "Detected",
+      "selection": "seeded random draw (seed 3)"
+    },
+    {
+      "sample_id": "noto_00906",
+      "label": 1,
+      "score": 0.98783,
+      "row": 1,
+      "image_columns": [
+        3,
+        4
+      ],
+      "category": "Detected",
+      "selection": "seeded random draw (seed 3)"
+    },
+    {
+      "sample_id": "noto_00586",
+      "label": 0,
+      "score": 0.86056,
+      "row": 2,
+      "image_columns": [
+        1,
+        2
+      ],
+      "category": "False alarm",
+      "selection": "seeded random draw (seed 3)"
+    },
+    {
+      "sample_id": "noto_01082",
+      "label": 0,
+      "score": 0.96839,
+      "row": 2,
+      "image_columns": [
+        3,
+        4
+      ],
+      "category": "False alarm",
+      "selection": "visually selected replacement"
+    },
+    {
+      "sample_id": "noto_00675",
+      "label": 1,
+      "score": 0.01439,
+      "row": 3,
+      "image_columns": [
+        1,
+        2
+      ],
+      "category": "Missed",
+      "selection": "seeded random draw (seed 3)"
+    },
+    {
+      "sample_id": "noto_00845",
+      "label": 1,
+      "score": 0.1656,
+      "row": 3,
+      "image_columns": [
+        3,
+        4
+      ],
+      "category": "Missed",
+      "selection": "seeded random draw (seed 3)"
+    }
+  ],
+  "landscape": {
+    "centre_lat": 37.2641044,
+    "centre_lon": 136.9172309,
+    "width_m": 1200,
+    "height_m": 800,
+    "zoom": 17,
+    "ground_sampling_m": 0.95050994227311,
+    "layers": [
+      "nendophoto2020",
+      "20240102noto_anamizu_0111do"
+    ],
+    "verified_segments": 17,
+    "blocked": 3,
+    "prediction_unit": "one classification score per nominal 50 m road segment",
+    "colour_mapping": "YlOrRd(score), range 0 to 1, no spatial interpolation",
+    "scores": "oof_ft_convnext_siamese_v2_verified.csv",
+    "segments": [
+      {
+        "sample_id": "noto_00794",
+        "label": 1,
+        "score": 0.9909
+      },
+      {
+        "sample_id": "noto_00795",
+        "label": 0,
+        "score": 0.70188
+      },
+      {
+        "sample_id": "noto_00796",
+        "label": 0,
+        "score": 0.0009
+      },
+      {
+        "sample_id": "noto_00800",
+        "label": 0,
+        "score": 0.00328
+      },
+      {
+        "sample_id": "noto_00801",
+        "label": 0,
+        "score": 0.89631
+      },
+      {
+        "sample_id": "noto_00802",
+        "label": 1,
+        "score": 0.99036
+      },
+      {
+        "sample_id": "noto_00803",
+        "label": 1,
+        "score": 0.88563
+      },
+      {
+        "sample_id": "noto_00901",
+        "label": 0,
+        "score": 0.11713
+      },
+      {
+        "sample_id": "noto_01214",
+        "label": 0,
+        "score": 0.00717
+      },
+      {
+        "sample_id": "noto_01511",
+        "label": 0,
+        "score": 0.00488
+      },
+      {
+        "sample_id": "noto_01597",
+        "label": 0,
+        "score": 0.01081
+      },
+      {
+        "sample_id": "noto_01827",
+        "label": 0,
+        "score": 0.00386
+      },
+      {
+        "sample_id": "noto_01907",
+        "label": 0,
+        "score": 0.0163
+      },
+      {
+        "sample_id": "noto_02068",
+        "label": 0,
+        "score": 0.00463
+      },
+      {
+        "sample_id": "noto_02205",
+        "label": 0,
+        "score": 0.00017
+      },
+      {
+        "sample_id": "noto_02206",
+        "label": 0,
+        "score": 0.00328
+      },
+      {
+        "sample_id": "noto_03228",
+        "label": 0,
+        "score": 0.00352
+      }
+    ]
+  }
+}

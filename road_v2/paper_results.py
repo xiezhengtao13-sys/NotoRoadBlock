@@ -380,7 +380,7 @@ def outline(sid):
     return corridor & ~inner
 
 
-def fig_examples(src, n=2):
+def fig_examples(src, n=2, overrides=None):
     d = oof(PROP_CFG, src)
     rows = [dict(sample_id=i, label=int(y), score=float(s)) for i, y, s in zip(d["id"], d["y"], d["s"])]
     rng = np.random.default_rng(3)
@@ -388,6 +388,16 @@ def fig_examples(src, n=2):
     groups = [("Detected", pick([r for r in rows if r["label"] == 1 and r["score"] > 0.9])),
               ("False alarm", pick([r for r in rows if r["label"] == 0 and r["score"] > 0.8])),
               ("Missed", pick([r for r in rows if r["label"] == 1 and r["score"] < 0.2]))]
+    # A visually selected replacement for the second false-alarm pair in the final figure.
+    replacements = {(1, 1): 'noto_01082'} if overrides is None and src == 'verified' and n == 2 else (overrides or {})
+    by_id = {r['sample_id']: r for r in rows}
+    for (i, j), sid in replacements.items():
+        r = by_id[sid]
+        assert (i == 0 and r['label'] == 1 and r['score'] > .9) or (i == 1 and r['label'] == 0 and r['score'] > .8) or (i == 2 and r['label'] == 1 and r['score'] < .2)
+        groups[i][1][j] = r
+    records = [dict(r, row=i+1, image_columns=[2*j+1, 2*j+2], category=g,
+                    selection='visually selected replacement' if (i, j) in replacements else 'seeded random draw (seed 3)')
+               for i, (g, items) in enumerate(groups) for j, r in enumerate(items)]
     fig, axes = plt.subplots(3, 2 * n, figsize=(7.2, 5.6))
     for i, (g, items) in enumerate(groups):
         for j in range(n):
@@ -405,6 +415,7 @@ def fig_examples(src, n=2):
     fig.tight_layout(h_pad=0.6, w_pad=0.3)
     out = PAPER / "figures" / f"fig7_examples_{src}.jpg"
     fig.savefig(out, dpi=300, facecolor="white", pil_kwargs={"quality": 92}); plt.close(fig)
+    (PAPER / 'figures' / f'qualitative_provenance_{src}.json').write_text(json.dumps(records, indent=2), encoding='utf-8')
     return out
 
 

@@ -67,14 +67,14 @@ for f in features:
 assert any(y==1 for _,g,y,s in segs)
 plt.rcParams.update({'font.family':'Arial','font.size':8})
 fig,axes=plt.subplots(2,2,figsize=(7.2,5.65),facecolor='white')
-titles=['(a) Pre-event | 2020','(b) Post-event | 11 January 2024','(c) Verified road labels','(d) Out-of-fold blockage probability']
+titles=['(a) Pre-event | 2020','(b) Post-event | 11 January 2024','(c) Reference segment labels','(d) Road-segment classification scores']
 for n,(ax,title) in enumerate(zip(axes.flat,titles)):
     ax.imshow(images[0 if n==0 else 1]);ax.set(xlim=(0,width),ylim=(height,0));ax.set_xticks([]);ax.set_yticks([])
     ax.set_title(title,loc='left',fontsize=8.5,fontweight='bold',pad=5)
     for spine in ax.spines.values():spine.set_visible(False)
     if n>=2:
         for sid,g,label,score in segs:
-            color=('#ce273c' if label else '#20c3ac') if n==2 else plt.get_cmap('YlOrRd')(.05+.95*score)
+            color=('#ce273c' if label else '#20c3ac') if n==2 else plt.get_cmap('YlOrRd')(score)
             ax.plot(g[:,0],g[:,1],color=color,lw=2.1,solid_capstyle='round',path_effects=[pe.Stroke(linewidth=3.2,foreground='white'),pe.Normal()])
     # All panels share the same true scale and extent.
     bar=100/gsd
@@ -83,10 +83,10 @@ for n,(ax,title) in enumerate(zip(axes.flat,titles)):
     ax.text(width*.96,height*.08,'N',color='white',ha='center',fontsize=8,path_effects=[pe.withStroke(linewidth=2,foreground='black')])
 axes[1,0].legend(handles=[Line2D([0],[0],color='#ce273c',lw=3,label='Blocked'),Line2D([0],[0],color='#20c3ac',lw=3,label='Clear')],loc='upper left',fontsize=7,framealpha=.95)
 fig.subplots_adjust(left=.005,right=.995,top=.96,bottom=.105,hspace=.16,wspace=.035)
-cax=fig.add_axes([.57,.06,.33,.012]);sm=plt.cm.ScalarMappable(cmap='YlOrRd',norm=plt.Normalize(0,1));cb=fig.colorbar(sm,cax=cax,orientation='horizontal');cb.set_label('p(blocked)',fontsize=7,labelpad=2);cb.ax.tick_params(labelsize=7,length=2,pad=1)
-fig.text(.01,.04,'Source: GSI orthophotos | OSM roads\nLabelled sample segments only',fontsize=7,color='#526575')
+cax=fig.add_axes([.57,.06,.33,.012]);sm=plt.cm.ScalarMappable(cmap='YlOrRd',norm=plt.Normalize(0,1));cb=fig.colorbar(sm,cax=cax,orientation='horizontal');cb.set_label('p(blocked) per road segment',fontsize=7,labelpad=2);cb.ax.tick_params(labelsize=7,length=2,pad=1)
+fig.text(.01,.04,'Source: GSI orthophotos | OSM roads\n17 sampled segments; one score per 50 m segment',fontsize=7,color='#526575')
 fig.savefig(OUT/'fig_landscape.jpg',dpi=400,quality=96) if False else fig.savefig(OUT/'fig_landscape.jpg',dpi=400,pil_kwargs={'quality':96})
 fig.savefig(OUT/'fig_landscape.pdf',dpi=300)
-metadata={'centre_lat':LAT,'centre_lon':LON,'width_m':W_M,'height_m':H_M,'zoom':Z,'ground_sampling_m':gsd,'layers':LAYERS,'verified_segments':len(segs),'blocked':sum(y for _,g,y,s in segs),'scores':'oof_ft_convnext_siamese_v2_verified.csv','segments':[{'sample_id':sid,'label':label,'score':score} for sid,g,label,score in segs]}
+metadata={'centre_lat':LAT,'centre_lon':LON,'width_m':W_M,'height_m':H_M,'zoom':Z,'ground_sampling_m':gsd,'layers':LAYERS,'verified_segments':len(segs),'blocked':sum(y for _,g,y,s in segs),'prediction_unit':'one classification score per nominal 50 m road segment','colour_mapping':'YlOrRd(score), range 0 to 1, no spatial interpolation','scores':'oof_ft_convnext_siamese_v2_verified.csv','segments':[{'sample_id':sid,'label':label,'score':score} for sid,g,label,score in segs]}
 (OUT/'landscape_provenance.json').write_text(json.dumps(metadata,indent=2),encoding='utf-8')
 print(json.dumps({k:v for k,v in metadata.items() if k!='segments'},ensure_ascii=False))

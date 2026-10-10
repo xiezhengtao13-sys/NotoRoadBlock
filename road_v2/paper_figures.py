@@ -182,7 +182,7 @@ def main() -> int:
     if "--" in args:
         k = args.index("--"); blocked, clear = args[:k], args[k + 1:]
     else:  # all verified by the interpreter; noto_00796 lies on the same motorway as noto_00794, next to a slope failure
-        blocked, clear = ["noto_00794", "noto_00028", "noto_00950"], ["noto_00796", "noto_02759"]
+        blocked, clear = ["noto_00794", "noto_00028", "noto_00999"], ["noto_00796", "noto_02759"]
     fig_study_area(rows)
     fig_examples(rows, blocked, clear)
     return 0
