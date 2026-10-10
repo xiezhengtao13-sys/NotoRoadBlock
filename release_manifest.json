@@ -35,13 +35,13 @@
     },
     {
       "path": "docs/figure_sources.json",
-      "bytes": 3602,
-      "sha256": "7875600fe6c2c422eed93d057e08d91ff55f05c7a58afc2612fc7b2302cb531f"
+      "bytes": 3721,
+      "sha256": "289367bf3be44847eddc74b8367efb09b050f0b9ca69d303be90105cd2f176a1"
     },
     {
       "path": "docs/reproduction.md",
-      "bytes": 4177,
-      "sha256": "e8a93363d576407943053673fdc72fb70eb6b32d71e33e1a124d125a2d25a0fa"
+      "bytes": 4275,
+      "sha256": "406416b9aeecdb6de30202da9ad135fa9dec8648fb64ea62ac3cd89781b9ec5b"
     },
     {
       "path": "docs/tested_environments.json",
@@ -230,8 +230,8 @@
     },
     {
       "path": "road_v2/paper_revision/draw_landscape.py",
-      "bytes": 9272,
-      "sha256": "fb3a7577254ab2deba3ce1eaaa02e04d3c2b4f2f251c16f75d1f110452a2f93c"
+      "bytes": 9997,
+      "sha256": "c89341af3d2ac382f7e768c3f96fe9d3414cf4ad450d2569f243551ce919e7b2"
     },
     {
       "path": "road_v2/paper_revision/figures/landscape_roads.geojson",

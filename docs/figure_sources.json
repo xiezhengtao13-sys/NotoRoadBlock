@@ -153,6 +153,7 @@
       "width_m": 220,
       "height_m": 146.66666666666666
     },
-    "performance_metrics_changed": false
+    "performance_metrics_changed": false,
+    "zoom_connectors": "Two dashed lines from the right corners of the extent box in (c) to the left corners of (d)"
   }
 }

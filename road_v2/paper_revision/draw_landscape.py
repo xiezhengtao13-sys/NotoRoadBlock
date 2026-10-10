@@ -10,7 +10,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.patheffects as pe
 from matplotlib.lines import Line2D
-from matplotlib.patches import Rectangle
+from matplotlib.patches import Rectangle, ConnectionPatch
 from matplotlib.colors import to_rgb
 from shapely.geometry import LineString, box
 from shapely.ops import unary_union
@@ -156,6 +156,16 @@ axes[1, 0].add_patch(Rectangle((zx, zy), zoom_w, zoom_h, fill=False, edgecolor='
 axes[1, 0].text(zx, zy-9, 'Detail in (d)', color='white', fontsize=7,
                  path_effects=[pe.withStroke(linewidth=2, foreground='#333333')])
 fig.subplots_adjust(left=.005, right=.995, top=.96, bottom=.105, hspace=.16, wspace=.035)
+# Connect the right corners of the selected extent to the matching left corners
+# of the enlarged view. Figure-level artists keep the lines visible in the gutter.
+for overview_y, detail_y in ((zy, 0), (zy+zoom_h, close_size[1])):
+    connector = ConnectionPatch(
+        xyA=(zx+zoom_w, overview_y), xyB=(0, detail_y),
+        coordsA='data', coordsB='data', axesA=axes[1, 0], axesB=axes[1, 1],
+        color='white', linewidth=1, linestyle=(0, (4, 3)),
+        clip_on=False, zorder=5,
+        path_effects=[pe.withStroke(linewidth=2, foreground='#333333')])
+    fig.add_artist(connector)
 fig.text(.01, .045, 'Source: GSI orthophotos | OSM roads', fontsize=7, color='#526575')
 fig.text(.01, .022, 'Road annotations: blocked segments in red; remaining mapped roads in green',
          fontsize=7, color='#526575')
@@ -174,6 +184,7 @@ metadata = {
                 'width_px': close_size[0], 'height_px': close_size[1],
                 'width_m': zoom_w_m, 'height_m': zoom_h_m},
     'performance_metrics_changed': False,
+    'zoom_connectors': 'Two dashed lines from the right corners of the extent box in (c) to the left corners of (d)',
 }
 (OUT/'landscape_provenance.json').write_text(json.dumps(metadata, indent=2), encoding='utf-8')
 print(json.dumps(metadata, ensure_ascii=False))
